@@ -1,0 +1,28 @@
+security:
+    encoders:
+        IO\UserBundle\Entity\User: 
+          algorithm:  sha512
+          iterations: 742
+
+    role_hierarchy:
+        ROLE_MANAGER:       ROLE_EMPLOYEE
+        ROLE_OWNER:         ROLE_MANAGER
+        ROLE_ADMIN:         ROLE_OWNER
+        ROLE_SUPER_ADMIN:   ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        default:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true

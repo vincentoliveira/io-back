@@ -1,0 +1,30 @@
+{% extends "IODefaultBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+<div class="container">
+    <form class="col-md-6 col-md-offset-3" role="form" action="{{ path("fos_user_security_check") }}" method="POST">
+        <img src="{{ asset('bundles/iodefault/images/logo.png') }}" alt="InnovOrder" />
+        <h3 class="form-signin-heading">Authentifiez-vous pour accéder à votre compte.</h3>
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <div class="input-group">
+            <span class="input-group-addon"> <i class="fa fa-user"></i></span>
+            <input type="text" class="form-control" name="_username" placeholder="Login" required autofocus>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"> <i class="fa fa-lock"></i></span>
+            <input type="password" class="form-control" name="_password" placeholder="Password" required>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="_remember_me" value="remember-me"> Se souvenir de moi
+            </label>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <button type="submit" id="_submit" name="_submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
+    </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,12 @@
+/* Base */
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.navbar .navbar-brand img {
+    height: 20px;
+}
