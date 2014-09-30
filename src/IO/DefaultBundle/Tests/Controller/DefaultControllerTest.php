@@ -4,7 +4,7 @@ namespace IO\DefaultBundle\Tests\Controller;
 
 use IO\DefaultBundle\Tests\IOTestCase;
 
-class DemoControllerTest extends IOTestCase
+class DefaultControllerTest extends IOTestCase
 {
     
     public function setUp()

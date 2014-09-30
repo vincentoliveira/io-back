@@ -11,6 +11,7 @@ class CountryEnum
 {
 
     static $countries = array(
+        'FR' => 'France',
         'AF' => 'Afghanistan',
         'AX' => 'Aland Islands',
         'AL' => 'Albania',

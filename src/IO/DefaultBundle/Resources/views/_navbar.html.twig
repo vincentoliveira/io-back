@@ -1,3 +1,4 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -14,15 +15,29 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                {#
                 <li><a href="#"><i class="fa fa-cutlery"></i> Commandes</a></li>
                 <li><a href="#"><i class="fa fa-edit"></i> La carte</a></li>
                 <li><a href="#"><i class="fa fa-bar-chart-o"></i> Tableau de bord</a></li>
+                #}
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="dropdown{% if '/admin/' in currentPath %} active{% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        Administration
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li{% if currentPath starts with path('restaurant_admin') %} class="active"{% endif %}><a href="{{ path('restaurant_admin') }}"><i class="glyphicon glyphicon-cutlery"></i> Restaurant</a></li>
+                    </ul>
+                </li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="divider"></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-user"></i>
+                        <i class="glyphicon glyphicon-user"></i>
                         {{ app.user.username }}
                         <span class="caret"></span>
                     </a>

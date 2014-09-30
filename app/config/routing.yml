@@ -1,3 +1,8 @@
+io_restaurant:
+    resource: "@IORestaurantBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 io_user:
     resource: "@IOUserBundle/Controller/"
     type:     annotation

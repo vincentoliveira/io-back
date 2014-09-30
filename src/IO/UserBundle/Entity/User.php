@@ -32,12 +32,29 @@ class User extends BaseUser
     private $identity;
 
     /**
-     * @var UserIdentity
+     * @var MangoPayWallet
      *
-     * @ORM\ManyToOne(targetEntity="IO\UserBundle\Entity\UserWallet")
+     * @ORM\ManyToOne(targetEntity="IO\UserBundle\Entity\MangoPayWallet")
      * @ORM\JoinColumn(name="wallet_id", referencedColumnName="id", nullable=true)
      */
     private $wallet;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="IO\RestaurantBundle\Entity\Restaurant", mappedBy="managers")
+     **/
+    private $restaurants;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="IO\RestaurantBundle\Entity\RestaurantGroup", mappedBy="managers")
+     **/
+    private $restaurantGroups;
+
+    public function __construct() {
+     parent::__construct();
+
+     $this->restaurants = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->restaurantGroups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
     /**
      * Get id
@@ -75,10 +92,10 @@ class User extends BaseUser
     /**
      * Set wallet
      *
-     * @param \IO\UserBundle\Entity\UserWallet $wallet
+     * @param \IO\UserBundle\Entity\MangoPayWallet $wallet
      * @return User
      */
-    public function setWallet(\IO\UserBundle\Entity\UserWallet $wallet = null)
+    public function setWallet(\IO\UserBundle\Entity\MangoPayWallet $wallet = null)
     {
         $this->wallet = $wallet;
     
@@ -88,10 +105,76 @@ class User extends BaseUser
     /**
      * Get wallet
      *
-     * @return \IO\UserBundle\Entity\UserWallet 
+     * @return \IO\UserBundle\Entity\MangoPayWallet 
      */
     public function getWallet()
     {
         return $this->wallet;
+    }
+
+    /**
+     * Add restaurants
+     *
+     * @param \IO\RestaurantBundle\Entity\Restaurant $restaurants
+     * @return User
+     */
+    public function addRestaurant(\IO\RestaurantBundle\Entity\Restaurant $restaurants)
+    {
+        $this->restaurants[] = $restaurants;
+
+        return $this;
+    }
+
+    /**
+     * Remove restaurants
+     *
+     * @param \IO\RestaurantBundle\Entity\Restaurant $restaurants
+     */
+    public function removeRestaurant(\IO\RestaurantBundle\Entity\Restaurant $restaurants)
+    {
+        $this->restaurants->removeElement($restaurants);
+    }
+
+    /**
+     * Get restaurants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRestaurants()
+    {
+        return $this->restaurants;
+    }
+
+    /**
+     * Add restaurantGroups
+     *
+     * @param \IO\RestaurantBundle\Entity\RestaurantGroup $restaurantGroups
+     * @return User
+     */
+    public function addRestaurantGroup(\IO\RestaurantBundle\Entity\RestaurantGroup $restaurantGroups)
+    {
+        $this->restaurantGroups[] = $restaurantGroups;
+
+        return $this;
+    }
+
+    /**
+     * Remove restaurantGroups
+     *
+     * @param \IO\RestaurantBundle\Entity\RestaurantGroup $restaurantGroups
+     */
+    public function removeRestaurantGroup(\IO\RestaurantBundle\Entity\RestaurantGroup $restaurantGroups)
+    {
+        $this->restaurantGroups->removeElement($restaurantGroups);
+    }
+
+    /**
+     * Get restaurantGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRestaurantGroups()
+    {
+        return $this->restaurantGroups;
     }
 }

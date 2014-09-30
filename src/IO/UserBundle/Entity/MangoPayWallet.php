@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_wallet")
  * @ORM\Entity()
  */
-class UserWallet
+class MangoPayWallet
 {
     /**
      * @var integer $id
@@ -50,7 +50,7 @@ class UserWallet
      * Set userId
      *
      * @param string $userId
-     * @return UserWallet
+     * @return MangoPayWallet
      */
     public function setUserId($userId)
     {
@@ -73,7 +73,7 @@ class UserWallet
      * Set walletId
      *
      * @param string $walletId
-     * @return UserWallet
+     * @return MangoPayWallet
      */
     public function setWalletId($walletId)
     {

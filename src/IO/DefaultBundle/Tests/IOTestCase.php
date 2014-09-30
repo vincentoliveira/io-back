@@ -55,7 +55,7 @@ abstract class IOTestCase extends WebTestCase
         /** @var $userManager \FOS\UserBundle\Doctrine\UserManager */
         $userManager = $this->container->get('fos_user.user_manager');
 
-        $user = $userManager->findUserBy(array('username' => 'usertest'));
+        $user = $userManager->findUserBy(array('username' => $username));
         if ($user === null) {
             $user = new User();
         }
@@ -70,6 +70,48 @@ abstract class IOTestCase extends WebTestCase
         $this->em->flush();
 
         return $user;
+    }
+    
+    protected function deleteUser($username, $email = null)
+    {
+        /** @var $userManager \FOS\UserBundle\Doctrine\UserManager */
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserBy(array('username' => $username));
+        if ($user !== null) {
+            $this->em->remove($user);
+        }
+        
+        $user2 = $userManager->findUserBy(array('email' => $email));
+        if ($user2 !== null) {
+            $this->em->remove($user2);
+        }
+        
+        $this->em->flush();
+    }
+    
+    protected function deleteRestaurant($restaurantName)
+    {
+        $repository = $this->em->getRepository('IORestaurantBundle:Restaurant');
+
+        $group = $repository->findOneByName($restaurantName);
+        if ($group !== null) {
+            $this->em->remove($group);
+        }
+        
+        $this->em->flush();
+    }
+    
+    protected function deleteRestaurantGroup($groupName)
+    {
+        $repository = $this->em->getRepository('IORestaurantBundle:RestaurantGroup');
+
+        $group = $repository->findOneByName($groupName);
+        if ($group !== null) {
+            $this->em->remove($group);
+        }
+        
+        $this->em->flush();
     }
 
 }

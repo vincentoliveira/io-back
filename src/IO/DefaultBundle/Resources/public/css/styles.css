@@ -10,3 +10,23 @@ body {
 .navbar .navbar-brand img {
     height: 20px;
 }
+
+
+/* Forms */
+/* Profile form */
+.form-phone label,
+.form-address-street label,
+.form-address-city label {
+    display: block;
+}
+.form-phone-prefix,
+.form-address-street-number,
+.form-address-city-postcode {
+    width: 30%;
+    float: left;
+}
+.form-phone-number,
+.form-address-street-street,
+.form-address-city-city {
+    width: 70%;
+}

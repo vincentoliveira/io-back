@@ -1,0 +1,43 @@
+{% extends "IODefaultBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="container">    
+    <h1>
+        <a class="small" href="{{ path('restaurant_admin_show', {id:entity.id}) }}" title="Retour"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        Modifier {{ entity.name }}
+        <a class="small" href="#"><i class="glyphicon glyphicon-trash text-danger" title="Supprimer"></i></a>
+    </h1>
+    
+    <div class="hidden">{{ form(delete_form) }}</div>
+
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+    <div class="col-md-6">
+        <div class="form-group">
+        {{ form_row(edit_form.name) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group form-phone">
+            <label>Téléphone</label>
+            {{ form_widget(edit_form.phone.prefix) }}
+            {{ form_widget(edit_form.phone.number) }}
+        </div>
+        <div class="form-group">
+            <div class="form-address-street">
+                <label>Numéro et nom de rue</label>
+                {{ form_widget(edit_form.address.number) }}
+                {{ form_widget(edit_form.address.street) }}
+            </div>
+            <div class="form-address-city">
+                <label>Code postal et ville</label>
+                {{ form_widget(edit_form.address.postcode) }}
+                {{ form_widget(edit_form.address.city) }}
+                {{ form_row(edit_form.address.country) }}
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    {{ form_rest(edit_form) }}
+    {{ form_end(edit_form) }}
+{% endblock %}

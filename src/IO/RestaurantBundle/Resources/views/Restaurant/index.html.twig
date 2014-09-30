@@ -1,0 +1,23 @@
+{% extends "IODefaultBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="container">    
+    <h1>
+        Restaurants
+        <a class="small" href="{{ path('restaurant_admin_new') }}">Nouveau restaurant</a>
+    </h1>
+
+    <ul class="list-group">
+    {% for group in restaurant_groups %}
+        <li class="list-group-item">
+            <strong>{{ group.name }}</strong>
+            <ul>
+                {% for restaurant in group.restaurants %}
+                <li><a href="{{ path('restaurant_admin_show', {id:restaurant.id}) }}">{{ restaurant.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

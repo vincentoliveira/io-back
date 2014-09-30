@@ -6,8 +6,8 @@ security:
 
     role_hierarchy:
         ROLE_MANAGER:       ROLE_EMPLOYEE
-        ROLE_OWNER:         ROLE_MANAGER
-        ROLE_ADMIN:         ROLE_OWNER
+        ROLE_GROUP_MANAGER: ROLE_MANAGER
+        ROLE_ADMIN:         ROLE_GROUP_MANAGER
         ROLE_SUPER_ADMIN:   ROLE_ADMIN
 
     providers:
